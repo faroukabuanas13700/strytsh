@@ -5244,7 +5244,7 @@ let reelsTouchStartX = 0;
 let reelsTouchActive = false;
 let reelsChanging = false;
 
-async function changeReel(
+
 async function changeReel(
   direction
 ) {
