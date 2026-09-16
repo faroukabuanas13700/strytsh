@@ -12792,3 +12792,53 @@ playGridVideos();
 
 initializeApp();
 
+/* =========================================================
+   ÉCRAN CONNEXION / INSCRIPTION
+========================================================= */
+
+(() => {
+
+  const openBtn =
+    document.getElementById("openSignupBtn");
+
+  const backBtn =
+    document.getElementById("backToLoginBtn");
+
+  const loginPanel =
+    document.getElementById("loginPanel");
+
+  const signupPanel =
+    document.getElementById("signupPanel");
+
+
+  if (
+    openBtn &&
+    backBtn &&
+    loginPanel &&
+    signupPanel
+  ) {
+
+    openBtn.addEventListener(
+      "click",
+      () => {
+
+        loginPanel.hidden = true;
+        signupPanel.hidden = false;
+
+      }
+    );
+
+
+    backBtn.addEventListener(
+      "click",
+      () => {
+
+        signupPanel.hidden = true;
+        loginPanel.hidden = false;
+
+      }
+    );
+
+  }
+
+})();
