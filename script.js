@@ -2238,20 +2238,9 @@ function renderGrid() {
                 300
               ) {
 
-                if (
-  post.type === "video"
-) {
-
-  openReels(post);
-
-} else {
-
-  openViewer(
-    post.id
-  );
-
-}
-
+                openReels(
+  post
+);
               }
 
             },
