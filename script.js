@@ -789,10 +789,10 @@ function setupAuth() {
         event.preventDefault();
 
 
-        const email =
-          $("#signupEmail")
-            ?.value
-            .trim();
+        const username =
+  $("#signupUsername")
+    ?.value
+    .trim();
 
 
         const password =
@@ -801,9 +801,9 @@ function setupAuth() {
 
 
         if (
-          !email ||
-          !password
-        ) {
+  !username ||
+  !password
+) {
 
           if ($("#signupError")) {
 
@@ -818,9 +818,9 @@ function setupAuth() {
 
 
         await signupUser(
-          email,
-          password
-        );
+  username,
+  password
+);
 
       }
     );
