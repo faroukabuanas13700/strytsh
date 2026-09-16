@@ -4648,3 +4648,117 @@ CORRECTION MODIFIER PROFIL - STYLE INSTAGRAM
   }
 
 }
+/* =========================================================
+MODIFIER PROFIL - TAILLES PLUS PROCHES INSTAGRAM
+========================================================= */
+
+#profileDialog .profile-edit-form{
+  padding-left:18px !important;
+  padding-right:18px !important;
+}
+
+
+/* HEADER PLUS COMPACT */
+
+#profileDialog .profile-edit-header{
+  width:calc(100% + 36px) !important;
+  margin-left:-18px !important;
+
+  min-height:68px !important;
+
+  padding-left:18px !important;
+  padding-right:18px !important;
+
+  grid-template-columns:48px 1fr 48px !important;
+}
+
+#profileDialog .profile-edit-header h2{
+  font-size:22px !important;
+}
+
+#profileDialog .profile-edit-back{
+  width:40px !important;
+  height:40px !important;
+  font-size:32px !important;
+}
+
+
+/* ZONE PHOTO PLUS PETITE */
+
+#profileDialog .profile-edit-media{
+  padding:
+    22px 0
+    24px !important;
+}
+
+#profileDialog .profile-edit-avatar{
+  width:92px !important;
+  height:92px !important;
+
+  font-size:36px !important;
+}
+
+
+/* TEXTE SOUS LA PHOTO */
+
+#profileDialog .profile-edit-media-btn{
+  margin-top:14px !important;
+
+  font-size:15px !important;
+}
+
+#profileDialog .profile-cover-edit-btn{
+  margin-top:9px !important;
+}
+
+
+/* ESPACES ENTRE LES CHAMPS */
+
+#profileDialog .profile-edit-fields{
+  gap:10px !important;
+}
+
+
+/* BLOCS PLUS PETITS */
+
+#profileDialog label.profile-edit-field{
+  min-height:78px !important;
+
+  padding:
+    11px
+    17px !important;
+
+  border-radius:14px !important;
+}
+
+
+/* LABEL */
+
+#profileDialog .profile-edit-field > span{
+  margin-bottom:2px !important;
+
+  font-size:15px !important;
+}
+
+
+/* TEXTE SAISI */
+
+#profileDialog .profile-edit-field input,
+#profileDialog .profile-edit-field textarea{
+  font-size:16px !important;
+}
+
+#profileDialog .profile-edit-field input{
+  height:28px !important;
+}
+
+
+/* BIO */
+
+#profileDialog label.profile-edit-bio{
+  min-height:100px !important;
+}
+
+#profileDialog .profile-edit-field textarea{
+  min-height:55px !important;
+}
