@@ -4350,3 +4350,11 @@ IFRAME VIDEO - FIL D'ACTUALITÉ
   background:transparent;
   cursor:pointer;
 }
+/* =========================================================
+MASQUER LES ANCIENS BOUTONS PHOTO / BANNIÈRE
+========================================================= */
+
+.cover-edit,
+.avatar-plus {
+  display: none !important;
+}
