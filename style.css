@@ -1994,6 +1994,8 @@ REELS
   color:#fff;
   display:flex;
   flex-direction:column;
+  touch-action: none;
+overscroll-behavior: none;
 }
 
 .reels-stage{
@@ -2002,6 +2004,8 @@ REELS
   min-height:0;
   background:#000;
   overflow:hidden;
+  touch-action: none;
+overscroll-behavior: none;
 }
 
 .reels-video{
