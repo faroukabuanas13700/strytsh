@@ -36,89 +36,154 @@
 
   <!-- CONNEXION / INSCRIPTION -->
   <section id="authScreen" class="auth-screen" hidden>
-    <div class="auth-box">
 
-      <img
-  src="logo-strytsh.png"
-  alt="Logo strytsh"
-  class="auth-logo"
->
+  <video
+    class="auth-bg-video"
+    autoplay
+    muted
+    loop
+    playsinline
+  >
+    <source
+      src="auth-background.mp4"
+      type="video/mp4"
+    >
+  </video>
 
-      <p class="auth-subtitle">
-        Partagez vos photos et vidéos
-      </p>
+  <div class="auth-bg-overlay"></div>
 
-      <form id="loginForm" class="auth-form">
 
-        <input
-          id="loginEmail"
-          type="email"
-          placeholder="Adresse e-mail"
-          autocomplete="email"
-          required
-        >
+  <!-- CONNEXION -->
 
-        <input
-          id="loginPassword"
-          type="password"
-          placeholder="Mot de passe"
-          autocomplete="current-password"
-          required
-        >
+  <div
+    id="loginPanel"
+    class="auth-panel"
+  >
 
-        <button
-          type="submit"
-          class="auth-primary"
-        >
-          Se connecter
-        </button>
-
-        <div
-          class="auth-error"
-          id="loginError"
-        ></div>
-
-      </form>
-
-      <div class="auth-separator">
-        <span>OU</span>
-      </div>
-
-      <form id="signupForm" class="auth-form">
-
-        <input
-          id="signupEmail"
-          type="email"
-          placeholder="Adresse e-mail"
-          autocomplete="email"
-          required
-        >
-
-        <input
-          id="signupPassword"
-          type="password"
-          placeholder="Mot de passe"
-          autocomplete="new-password"
-          minlength="6"
-          required
-        >
-
-        <button
-          type="submit"
-          class="auth-secondary"
-        >
-          Créer un compte
-        </button>
-
-        <div
-          class="auth-error"
-          id="signupError"
-        ></div>
-
-      </form>
-
+    <div class="auth-brand">
+      strytsh
     </div>
-  </section>
+
+    <form
+      id="loginForm"
+      class="auth-form"
+    >
+
+      <input
+        id="loginEmail"
+        type="email"
+        autocomplete="email"
+        placeholder="E-mail"
+        required
+      >
+
+      <input
+        id="loginPassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Mot de passe"
+        required
+      >
+
+      <div
+        id="loginError"
+        class="auth-error"
+      ></div>
+
+      <button
+        type="submit"
+        class="auth-main-btn"
+      >
+        Se connecter
+      </button>
+
+    </form>
+
+    <button
+      id="forgotPasswordBtn"
+      class="auth-link-btn"
+      type="button"
+    >
+      Mot de passe oublié ?
+    </button>
+
+    <button
+      id="openSignupBtn"
+      class="auth-create-btn"
+      type="button"
+    >
+      Créer un nouveau compte
+    </button>
+
+  </div>
+
+
+  <!-- INSCRIPTION -->
+
+  <div
+    id="signupPanel"
+    class="auth-panel"
+    hidden
+  >
+
+    <button
+      id="backToLoginBtn"
+      class="auth-back-btn"
+      type="button"
+    >
+      ←
+    </button>
+
+    <div class="auth-signup-title">
+      Créer un compte
+    </div>
+
+    <form
+      id="signupForm"
+      class="auth-form"
+    >
+
+      <input
+        id="signupEmail"
+        type="email"
+        autocomplete="email"
+        placeholder="Adresse e-mail"
+        required
+      >
+
+      <input
+        id="signupPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Mot de passe"
+        required
+      >
+
+      <input
+        id="signupPasswordConfirm"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Confirmer le mot de passe"
+        required
+      >
+
+      <div
+        id="signupError"
+        class="auth-error"
+      ></div>
+
+      <button
+        type="submit"
+        class="auth-main-btn"
+      >
+        Créer mon compte
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
 
 
   <!-- APPLICATION -->
