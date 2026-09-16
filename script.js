@@ -485,9 +485,18 @@ async function loginUser(
 
 
 async function signupUser(
-  email,
+  username,
   password
 ) {
+
+  const cleanUsername =
+    username
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9._-]/g, "");
+
+  const internalEmail =
+    `${cleanUsername}@strytsh.invalid`;
 
   if (!supabaseReady()) {
     return;
@@ -523,10 +532,14 @@ async function signupUser(
       error
     } =
       await supabaseClient.auth.signUp({
-        email,
-        password
-      });
-
+  email: internalEmail,
+  password,
+  options: {
+    data: {
+      username: cleanUsername
+    }
+  }
+});
 
     if (error) {
       throw error;
