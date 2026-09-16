@@ -5194,7 +5194,6 @@ let reelsTouchStartX = 0;
 let reelsTouchActive = false;
 let reelsChanging = false;
 
-
 async function changeReel(
   direction
 ) {
@@ -5207,11 +5206,9 @@ async function changeReel(
     return;
   }
 
-
   const nextIndex =
     currentReelIndex +
     direction;
-
 
   if (
     nextIndex < 0 ||
@@ -5220,33 +5217,106 @@ async function changeReel(
     return;
   }
 
-
   reelsChanging = true;
 
-  currentReelIndex =
-    nextIndex;
+  const stage =
+    document.querySelector(
+      "#reelsPage .reels-stage"
+    );
 
+  const exitY =
+    direction > 0
+      ? "-100%"
+      : "100%";
+
+  const enterY =
+    direction > 0
+      ? "100%"
+      : "-100%";
 
   try {
 
+    if (stage) {
+
+      stage.style.transition =
+        "transform 180ms cubic-bezier(.25,.8,.25,1)";
+
+      stage.style.transform =
+        `translate3d(0, ${exitY}, 0)`;
+
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            180
+          )
+      );
+
+    }
+
+    currentReelIndex =
+      nextIndex;
+
     await openReels(
-      reelPosts[currentReelIndex],
+      reelPosts[
+        currentReelIndex
+      ],
       true
     );
+
+    if (stage) {
+
+      stage.style.transition =
+        "none";
+
+      stage.style.transform =
+        `translate3d(0, ${enterY}, 0)`;
+
+      stage.offsetHeight;
+
+      stage.style.transition =
+        "transform 220ms cubic-bezier(.25,.8,.25,1)";
+
+      requestAnimationFrame(
+        () => {
+
+          stage.style.transform =
+            "translate3d(0,0,0)";
+
+        }
+      );
+
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            220
+          )
+      );
+
+      stage.style.transition =
+        "";
+
+      stage.style.transform =
+        "";
+
+    }
 
   } finally {
 
     setTimeout(
       () => {
-        reelsChanging = false;
+
+        reelsChanging =
+          false;
+
       },
-      450
+      80
     );
 
   }
 
 }
-
 
 function handleReelsTouchStart(
   event
