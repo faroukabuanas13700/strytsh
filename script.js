@@ -4849,7 +4849,61 @@ REELS
 let currentReelPost = null;
 
 let currentReelOwnerId = null;
+let reelPosts = [];
+let currentReelIndex = -1;
 
+
+function setReelSequence(
+  post
+) {
+
+  if (
+    typeof explorePosts !== "undefined" &&
+    explorePosts.includes(post)
+  ) {
+
+    reelPosts =
+      explorePosts;
+
+  } else if (
+    typeof homeFeedPosts !== "undefined" &&
+    homeFeedPosts.includes(post)
+  ) {
+
+    reelPosts =
+      homeFeedPosts;
+
+  } else if (
+    state.posts.includes(post)
+  ) {
+
+    reelPosts =
+      state.posts;
+
+  } else {
+
+    reelPosts = [
+      post
+    ];
+
+  }
+
+
+  currentReelIndex =
+    reelPosts.findIndex(
+      item =>
+        item === post ||
+        item.id == post.id
+    );
+
+
+  if (
+    currentReelIndex < 0
+  ) {
+    currentReelIndex = 0;
+  }
+
+}
 
 async function updateReelsFollowButton(
   userId
@@ -5182,7 +5236,169 @@ const isEmbed =
     toast("Impossible de charger cette vidéo");
     return;
   }
+setReelSequence(
+  post
+);
+        let reelsTouchStartY = 0;
+let reelsTouchStartX = 0;
+let reelsTouchActive = false;
 
+
+async function changeReel(
+  direction
+) {
+
+  if (
+    !reelPosts.length ||
+    currentReelIndex < 0
+  ) {
+    return;
+  }
+
+
+  const nextIndex =
+    currentReelIndex +
+    direction;
+
+
+  if (
+    nextIndex < 0 ||
+    nextIndex >= reelPosts.length
+  ) {
+    return;
+  }
+
+
+  currentReelIndex =
+    nextIndex;
+
+
+  await openReels(
+    reelPosts[
+      currentReelIndex
+    ],
+    true
+  );
+
+}
+
+
+function handleReelsTouchStart(
+  event
+) {
+
+  if (
+    event.target.closest(
+      "button, input, textarea, a"
+    )
+  ) {
+    return;
+  }
+
+
+  const touch =
+    event.touches?.[0];
+
+
+  if (!touch) {
+    return;
+  }
+
+
+  reelsTouchStartY =
+    touch.clientY;
+
+  reelsTouchStartX =
+    touch.clientX;
+
+  reelsTouchActive =
+    true;
+
+}
+
+
+async function handleReelsTouchEnd(
+  event
+) {
+
+  if (!reelsTouchActive) {
+    return;
+  }
+
+
+  reelsTouchActive =
+    false;
+
+
+  const touch =
+    event.changedTouches?.[0];
+
+
+  if (!touch) {
+    return;
+  }
+
+
+  const distanceY =
+    reelsTouchStartY -
+    touch.clientY;
+
+
+  const distanceX =
+    Math.abs(
+      reelsTouchStartX -
+      touch.clientX
+    );
+
+
+  if (
+    Math.abs(distanceY) < 60 ||
+    Math.abs(distanceY) <= distanceX
+  ) {
+    return;
+  }
+
+
+  if (distanceY > 0) {
+
+    /* SWIPE VERS LE HAUT =
+       PUBLICATION SUIVANTE */
+
+    await changeReel(
+      1
+    );
+
+  } else {
+
+    /* SWIPE VERS LE BAS =
+       PUBLICATION PRÉCÉDENTE */
+
+    await changeReel(
+      -1
+    );
+
+  }
+
+}
+        $("#reelsPage")
+  ?.addEventListener(
+    "touchstart",
+    handleReelsTouchStart,
+    {
+      passive: true
+    }
+  );
+
+
+$("#reelsPage")
+  ?.addEventListener(
+    "touchend",
+    handleReelsTouchEnd,
+    {
+      passive: true
+    }
+  );
+      
   currentReelPost = post;
 
 await updateCommentCount(
@@ -7851,27 +8067,10 @@ if (
   "click",
   async () => {
 
-    if (
+    await openReels(
+      post,
       post.type === "video"
-    ) {
-
-      await openReels(
-  post,
-  true
-);
-
-      return;
-    }
-
-    if (post.userId) {
-
-      await showProfileInterface();
-
-      await openUserProfile(
-        post.userId
-      );
-
-    }
+    );
 
   }
 );
