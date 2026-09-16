@@ -2844,7 +2844,62 @@ function extractExternalMedia(
     };
 
   }
+  
+/* IMAGE HTML */
 
+if (
+  /<img[\s>]/i.test(
+    text
+  )
+) {
+
+  const documentParsed =
+    new DOMParser()
+      .parseFromString(
+        text,
+        "text/html"
+      );
+
+  const img =
+    documentParsed
+      .querySelector(
+        "img"
+      );
+
+  const src =
+    img
+      ?.getAttribute(
+        "src"
+      )
+      ?.trim();
+
+  if (!src) {
+    throw new Error(
+      "Cette image ne contient pas d’adresse valide."
+    );
+  }
+
+  const url =
+    new URL(
+      src,
+      location.href
+    );
+
+  if (
+    url.protocol !==
+    "https:"
+  ) {
+    throw new Error(
+      "Seules les adresses HTTPS sont acceptées."
+    );
+  }
+
+  return {
+    url: url.href,
+    sourceType: "external"
+  };
+
+}
 
   /* URL DIRECTE */
 
