@@ -4303,6 +4303,22 @@ CHOIX DE PUBLICATION
   border:0;
   background:#000;
 }
+.reels-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+  background: #000;
+}
+
+.reels-image[hidden] {
+  display: none !important;
+}
 /* =========================================================
 IFRAME VIDEO - FIL D'ACTUALITÉ
 ========================================================= */
