@@ -1191,10 +1191,49 @@ renderProfileEditAvatar();
 
     }
   );
+
+$("#profileMediaEditBtn")
+  ?.addEventListener(
+    "click",
+    () => {
+
+      const menu =
+        $("#profileMediaMenu");
+
+      if (menu) {
+        menu.hidden = false;
+      }
+
+    }
+  );
+
+
+$("#profileMediaCancelBtn")
+  ?.addEventListener(
+    "click",
+    () => {
+
+      const menu =
+        $("#profileMediaMenu");
+
+      if (menu) {
+        menu.hidden = true;
+      }
+
+    }
+  );
+
 $("#profileAvatarEditBtn")
   ?.addEventListener(
     "click",
     () => {
+      
+      const menu =
+  $("#profileMediaMenu");
+
+if (menu) {
+  menu.hidden = true;
+}
       $("#avatarInput")
         ?.click();
     }
@@ -1205,6 +1244,15 @@ $("#profileCoverEditBtn")
   ?.addEventListener(
     "click",
     () => {
+      
+      const menu =
+  $("#profileMediaMenu");
+
+if (menu) {
+  menu.hidden = true;
+}
+    
+
       $("#coverInput")
         ?.click();
     }
