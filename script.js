@@ -5242,13 +5242,15 @@ setReelSequence(
         let reelsTouchStartY = 0;
 let reelsTouchStartX = 0;
 let reelsTouchActive = false;
+let reelsChanging = false;
 
-
+async function changeReel(
 async function changeReel(
   direction
 ) {
 
   if (
+    reelsChanging ||
     !reelPosts.length ||
     currentReelIndex < 0
   ) {
@@ -5269,19 +5271,36 @@ async function changeReel(
   }
 
 
+  reelsChanging = true;
+
   currentReelIndex =
     nextIndex;
 
 
-  await openReels(
-    reelPosts[
-      currentReelIndex
-    ],
-    true
-  );
+  try {
+
+    await openReels(
+      reelPosts[
+        currentReelIndex
+      ],
+      true
+    );
+
+  } finally {
+
+    setTimeout(
+      () => {
+
+        reelsChanging =
+          false;
+
+      },
+      350
+    );
+
+  }
 
 }
-
 
 function handleReelsTouchStart(
   event
