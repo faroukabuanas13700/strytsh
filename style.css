@@ -4358,8 +4358,293 @@ MASQUER LES ANCIENS BOUTONS PHOTO / BANNIÈRE
 .avatar-plus {
   display: none !important;
 }
-/* =========================================================
-MODIFIER LE PROFIL - STYLE INSTAGRAM
+
+  /* =========================================================
+CORRECTION MODIFIER PROFIL - STYLE INSTAGRAM
 ========================================================= */
 
-  
+#profileDialog.profile-edit-page{
+  position:fixed !important;
+  inset:0 !important;
+
+  width:100% !important;
+  max-width:none !important;
+
+  height:100dvh !important;
+  max-height:none !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  border:0 !important;
+  border-radius:0 !important;
+
+  background:#090c10 !important;
+  color:#fff !important;
+
+  overflow-y:auto !important;
+}
+
+
+/* FORMULAIRE */
+
+#profileDialog .profile-edit-form{
+  width:100% !important;
+  min-height:100% !important;
+
+  margin:0 !important;
+  padding:0 26px 45px !important;
+
+  box-sizing:border-box !important;
+
+  background:#090c10 !important;
+}
+
+
+/* HAUT DE PAGE */
+
+#profileDialog .profile-edit-header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:20 !important;
+
+  width:calc(100% + 52px) !important;
+  min-height:84px !important;
+
+  margin-left:-26px !important;
+
+  padding:
+    max(12px, env(safe-area-inset-top))
+    26px
+    10px !important;
+
+  box-sizing:border-box !important;
+
+  display:grid !important;
+  grid-template-columns:55px 1fr 55px !important;
+  align-items:center !important;
+
+  background:#090c10 !important;
+}
+
+
+#profileDialog .profile-edit-header h2{
+  margin:0 !important;
+
+  color:#fff !important;
+
+  font-size:27px !important;
+  font-weight:700 !important;
+
+  text-align:left !important;
+}
+
+
+#profileDialog .profile-edit-back{
+  width:45px !important;
+  height:45px !important;
+
+  border:0 !important;
+  padding:0 !important;
+
+  background:transparent !important;
+  color:#fff !important;
+
+  font-size:38px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+}
+
+
+/* ON CACHE "TERMINÉ" POUR RESSEMBLER À TA CAPTURE */
+
+#profileDialog .profile-edit-save{
+  visibility:hidden !important;
+}
+
+
+/* PHOTO PROFIL */
+
+#profileDialog .profile-edit-media{
+  width:100% !important;
+
+  padding:35px 0 32px !important;
+
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+}
+
+
+#profileDialog .profile-edit-avatar{
+  width:120px !important;
+  height:120px !important;
+
+  border-radius:50% !important;
+  overflow:hidden !important;
+
+  background:#24282e !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  font-size:45px !important;
+}
+
+
+#profileDialog .profile-edit-avatar img{
+  width:100% !important;
+  height:100% !important;
+
+  display:block !important;
+  object-fit:cover !important;
+}
+
+
+#profileDialog .profile-edit-media-btn{
+  width:auto !important;
+  height:auto !important;
+
+  margin:20px 0 0 !important;
+  padding:0 !important;
+
+  border:0 !important;
+
+  background:transparent !important;
+  color:#819cff !important;
+
+  font-size:17px !important;
+  font-weight:600 !important;
+}
+
+
+#profileDialog .profile-cover-edit-btn{
+  margin-top:12px !important;
+}
+
+
+/* ZONE DES CHAMPS */
+
+#profileDialog .profile-edit-fields{
+  width:100% !important;
+
+  padding:0 !important;
+  margin:0 !important;
+
+  display:flex !important;
+  flex-direction:column !important;
+  gap:12px !important;
+}
+
+
+/* CHAQUE BLOC */
+
+#profileDialog label.profile-edit-field{
+  width:100% !important;
+  min-height:98px !important;
+
+  margin:0 !important;
+  padding:14px 24px !important;
+
+  box-sizing:border-box !important;
+
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+
+  border:1px solid #30363e !important;
+  border-radius:18px !important;
+
+  background:transparent !important;
+}
+
+
+/* TITRE DU CHAMP */
+
+#profileDialog .profile-edit-field > span{
+  display:block !important;
+
+  width:100% !important;
+
+  margin:0 0 5px !important;
+
+  color:#9ba1aa !important;
+
+  font-size:18px !important;
+  font-weight:400 !important;
+}
+
+
+/* INPUTS */
+
+#profileDialog .profile-edit-field input,
+#profileDialog .profile-edit-field textarea{
+  display:block !important;
+
+  width:100% !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  border:0 !important;
+  border-radius:0 !important;
+  outline:0 !important;
+
+  background:transparent !important;
+  color:#fff !important;
+
+  font-family:inherit !important;
+  font-size:19px !important;
+  font-weight:500 !important;
+
+  box-shadow:none !important;
+}
+
+
+#profileDialog .profile-edit-field input{
+  height:35px !important;
+}
+
+
+#profileDialog .profile-edit-field textarea{
+  min-height:80px !important;
+
+  resize:none !important;
+}
+
+
+/* BIO PLUS HAUTE */
+
+#profileDialog label.profile-edit-bio{
+  min-height:125px !important;
+}
+
+
+/* PLACEHOLDER */
+
+#profileDialog input::placeholder,
+#profileDialog textarea::placeholder{
+  color:#777e87 !important;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  #profileDialog .profile-edit-form{
+    padding-left:27px !important;
+    padding-right:27px !important;
+  }
+
+  #profileDialog .profile-edit-header{
+    width:calc(100% + 54px) !important;
+    margin-left:-27px !important;
+    padding-left:27px !important;
+    padding-right:27px !important;
+  }
+
+}
