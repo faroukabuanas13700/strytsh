@@ -734,10 +734,17 @@ function setupAuth() {
         event.preventDefault();
 
 
-        const email =
-          $("#loginEmail")
-            ?.value
-            .trim();
+        const username =
+  ($("#loginUsername")?.value || "")
+    .trim();
+
+const cleanUsername =
+  username
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]/g, "");
+
+const internalEmail =
+  `${cleanUsername}@strytsh.invalid`;
 
 
         const password =
@@ -746,9 +753,9 @@ function setupAuth() {
 
 
         if (
-          !email ||
-          !password
-        ) {
+  !username ||
+  !password
+) {
 
           if ($("#loginError")) {
 
@@ -763,9 +770,9 @@ function setupAuth() {
 
 
         await loginUser(
-          email,
-          password
-        );
+  internalEmail,
+  password
+);
 
       }
     );
