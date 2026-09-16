@@ -5154,7 +5154,11 @@ $("#reelsSoundBtn")
   console.log("Ouverture Reel :", post);
 
   const page = document.getElementById("reelsPage");
-  const video = document.getElementById("reelsVideo");
+         const video = document.getElementById("reelsVideo");
+        const image =
+  document.getElementById(
+    "reelsImage"
+  );
 const embed =
   document.getElementById(
     "reelsEmbed"
@@ -5168,6 +5172,10 @@ const soundButton =
 const isEmbed =
   post?.sourceType ===
   "embed";
+        const isImage =
+  post?.type ===
+  "image";
+        
   if (!page) {
     console.error("reelsPage introuvable");
     toast("Erreur : page Reels introuvable");
@@ -5206,10 +5214,9 @@ addPostOptionsButton(
   page.style.zIndex = "99999";
 
   document.body.style.overflow = "hidden";
+if (isEmbed) {
 
-  if (isEmbed) {
-
-  /* VIDEO IFRAME */
+  /* IFRAME */
 
   try {
     video.pause();
@@ -5221,49 +5228,85 @@ addPostOptionsButton(
 
   video.load();
 
-  video.hidden =
-    true;
+  video.hidden = true;
 
 
-  if (embed) {
-
-    embed.hidden =
-      false;
-
-    embed.src =
-      post.src;
-
+  if (image) {
+    image.hidden = true;
+    image.removeAttribute(
+      "src"
+    );
   }
 
 
-  /* Le son d'une iframe est contrôlé
-     par son lecteur externe */
+  if (embed) {
+    embed.hidden = false;
+    embed.src = post.src;
+  }
+
 
   if (soundButton) {
-
-    soundButton.hidden =
-      true;
-
+    soundButton.hidden = true;
   }
 
-} else {
 
-  /* VIDEO CLASSIQUE */
+} else if (isImage) {
+
+  /* PHOTO */
+
+  try {
+    video.pause();
+  } catch {}
+
+  video.removeAttribute(
+    "src"
+  );
+
+  video.load();
+
+  video.hidden = true;
+
 
   if (embed) {
-
-    embed.hidden =
-      true;
-
+    embed.hidden = true;
     embed.removeAttribute(
       "src"
     );
-
   }
 
 
-  video.hidden =
-    false;
+  if (image) {
+    image.src = post.src;
+    image.hidden = false;
+  }
+
+
+  if (soundButton) {
+    soundButton.hidden = true;
+  }
+
+
+} else {
+
+  /* VIDEO NORMALE */
+
+  if (image) {
+    image.hidden = true;
+    image.removeAttribute(
+      "src"
+    );
+  }
+
+
+  if (embed) {
+    embed.hidden = true;
+    embed.removeAttribute(
+      "src"
+    );
+  }
+
+
+  video.hidden = false;
 
 
   try {
@@ -5271,22 +5314,18 @@ addPostOptionsButton(
   } catch {}
 
 
-  video.controls =
-    false;
+  video.controls = false;
 
   video.removeAttribute(
     "controls"
   );
 
 
-  video.src =
-    post.src;
+  video.src = post.src;
 
-  video.loop =
-    true;
+  video.loop = true;
 
-  video.playsInline =
-    true;
+  video.playsInline = true;
 
 
   video.setAttribute(
@@ -5305,10 +5344,7 @@ addPostOptionsButton(
 
 
   if (soundButton) {
-
-    soundButton.hidden =
-      false;
-
+    soundButton.hidden = false;
   }
 
 
@@ -5317,6 +5353,7 @@ addPostOptionsButton(
   video.load();
 
 }
+  
   const likeCount =
     document.getElementById(
       "reelsLikeCount"
@@ -5436,7 +5473,10 @@ await updateReelsFollowButton(
   }
 
  
-if (!isEmbed) {
+if (
+  !isEmbed &&
+  !isImage
+) {
 
   try {
 
