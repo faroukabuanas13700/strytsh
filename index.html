@@ -1072,90 +1072,152 @@
     </section>
 
 
+    
     <!-- MODIFICATION PROFIL -->
-    <dialog
-      class="dialog"
-      id="profileDialog"
-    >
 
-      <form id="profileForm">
+<dialog
+  id="profileDialog"
+  class="profile-edit-page"
+>
 
-        <div class="dialog-head">
+  <form
+    id="profileForm"
+    class="profile-edit-form"
+  >
 
-          <h2>
-            Modifier le profil
-          </h2>
+    <!-- EN-TÊTE -->
 
-          <button
-            type="button"
-            class="close"
-            id="profileDialogClose"
-            aria-label="Fermer"
-          >
-            ×
-          </button>
+    <header class="profile-edit-header">
 
-        </div>
+      <button
+        type="button"
+        id="profileDialogClose"
+        class="profile-edit-back"
+        aria-label="Retour"
+      >
+        ←
+      </button>
 
-        <label>
+      <h2>
+        Modifier le profil
+      </h2>
+
+      <button
+        type="submit"
+        class="profile-edit-save"
+      >
+        Terminé
+      </button>
+
+    </header>
+
+
+    <!-- PHOTO DE PROFIL -->
+
+    <section class="profile-edit-media">
+
+      <div
+        id="profileEditAvatar"
+        class="profile-edit-avatar"
+      >
+        👤
+      </div>
+
+      <button
+        type="button"
+        id="profileAvatarEditBtn"
+        class="profile-edit-media-btn"
+      >
+        Modifier la photo de profil
+      </button>
+
+
+      <button
+        type="button"
+        id="profileCoverEditBtn"
+        class="profile-edit-media-btn profile-cover-edit-btn"
+      >
+        Modifier la bannière
+      </button>
+
+    </section>
+
+
+    <!-- CHAMPS -->
+
+    <section class="profile-edit-fields">
+
+      <label class="profile-edit-field">
+
+        <span>
           Nom
+        </span>
 
-          <input
-            id="nameInput"
-            maxlength="40"
-          >
-        </label>
+        <input
+          id="nameInput"
+          type="text"
+          autocomplete="name"
+        >
 
-        <label>
-          Nom d'utilisateur
+      </label>
 
-          <input
-            id="usernameInput"
-            maxlength="30"
-          >
-        </label>
 
-        <label>
+      <label class="profile-edit-field">
+
+        <span>
+          Nom de profil
+        </span>
+
+        <input
+          id="usernameInput"
+          type="text"
+          autocomplete="username"
+        >
+
+      </label>
+
+
+      <label class="profile-edit-field profile-edit-bio">
+
+        <span>
           Bio
+        </span>
 
-          <textarea
-            id="bioInput"
-            maxlength="150"
-          ></textarea>
-        </label>
+        <textarea
+          id="bioInput"
+        ></textarea>
 
-        <label>
+      </label>
+
+
+      <label class="profile-edit-field">
+
+        <span>
           Lien
+        </span>
 
-          <input
-            id="linkInput"
-            type="url"
-            placeholder="https://..."
-          >
-        </label>
+        <input
+          id="linkInput"
+          type="url"
+          placeholder="Ajouter un lien"
+        >
 
-        <div class="dialog-actions">
+      </label>
 
-          <button
-            type="button"
-            class="secondary-btn"
-            id="profileCancelBtn"
-          >
-            Annuler
-          </button>
+    </section>
 
-          <button
-            type="submit"
-            class="primary-btn"
-          >
-            Enregistrer
-          </button>
 
-        </div>
+    <button
+      type="button"
+      id="profileCancelBtn"
+      hidden
+    >
+      Annuler
+    </button>
 
-      </form>
+  </form>
 
-    </dialog>
+</dialog>
 
 
     <!-- INPUT PUBLICATION -->
