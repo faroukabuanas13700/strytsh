@@ -1091,7 +1091,47 @@ if ($("#totalLikes")) {
       : "extaze";
 
 }
+function renderProfileEditAvatar() {
 
+  const box =
+    $("#profileEditAvatar");
+
+  if (!box) {
+    return;
+  }
+
+  box.innerHTML = "";
+
+  const avatarUrl =
+    state.customMedia.avatar ||
+    currentUserAvatar ||
+    "";
+
+  if (avatarUrl) {
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+    img.src =
+      avatarUrl;
+
+    img.alt =
+      "Photo de profil";
+
+    box.appendChild(
+      img
+    );
+
+  } else {
+
+    box.textContent =
+      "👤";
+
+  }
+
+}
 
 $("#editProfileBtn")
   ?.addEventListener(
@@ -1133,7 +1173,8 @@ $("#editProfileBtn")
 
       }
 
-
+renderProfileEditAvatar();
+      
       const dialog =
         $("#profileDialog");
 
@@ -1150,7 +1191,24 @@ $("#editProfileBtn")
 
     }
   );
+$("#profileAvatarEditBtn")
+  ?.addEventListener(
+    "click",
+    () => {
+      $("#avatarInput")
+        ?.click();
+    }
+  );
 
+
+$("#profileCoverEditBtn")
+  ?.addEventListener(
+    "click",
+    () => {
+      $("#coverInput")
+        ?.click();
+    }
+  );
 
 $("#profileDialogClose")
   ?.addEventListener(
