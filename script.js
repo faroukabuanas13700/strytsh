@@ -5317,7 +5317,99 @@ async function changeReel(
   }
 
 }
+function handleReelsTouchMove(
+  event
+) {
 
+  if (
+    !reelsTouchActive ||
+    reelsChanging
+  ) {
+    return;
+  }
+
+
+  const touch =
+    event.touches?.[0];
+
+  if (!touch) {
+    return;
+  }
+
+
+  const distanceY =
+    touch.clientY -
+    reelsTouchStartY;
+
+
+  const distanceX =
+    Math.abs(
+      touch.clientX -
+      reelsTouchStartX
+    );
+
+
+  if (
+    Math.abs(distanceY) <=
+    distanceX
+  ) {
+    return;
+  }
+
+
+  event.preventDefault();
+
+
+  const stage =
+    document.querySelector(
+      "#reelsPage .reels-stage"
+    );
+
+
+  if (!stage) {
+    return;
+  }
+
+
+  let movement =
+    distanceY;
+
+
+  /* RÉSISTANCE SI ON EST
+     À LA PREMIÈRE PUBLICATION */
+
+  if (
+    movement > 0 &&
+    currentReelIndex <= 0
+  ) {
+
+    movement *= 0.22;
+
+  }
+
+
+  /* RÉSISTANCE SI ON EST
+     À LA DERNIÈRE PUBLICATION */
+
+  if (
+    movement < 0 &&
+    currentReelIndex >=
+      reelPosts.length - 1
+  ) {
+
+    movement *= 0.22;
+
+  }
+
+
+  stage.style.transition =
+    "none";
+
+
+  stage.style.transform =
+    `translate3d(0, ${movement}px, 0)`;
+
+}
 function handleReelsTouchStart(
   event
 ) {
@@ -5351,14 +5443,12 @@ function handleReelsTouchStart(
 }
 
 
+
 async function handleReelsTouchEnd(
   event
 ) {
 
-  if (
-    !reelsTouchActive ||
-    reelsChanging
-  ) {
+  if (!reelsTouchActive) {
     return;
   }
 
@@ -5367,11 +5457,47 @@ async function handleReelsTouchEnd(
     false;
 
 
+  const stage =
+    document.querySelector(
+      "#reelsPage .reels-stage"
+    );
+
+
+  const resetStage =
+    () => {
+
+      if (!stage) {
+        return;
+      }
+
+      stage.style.transition =
+        "transform 220ms cubic-bezier(.25,.8,.25,1)";
+
+      stage.style.transform =
+        "translate3d(0,0,0)";
+
+    };
+
+
+  if (reelsChanging) {
+
+    resetStage();
+
+    return;
+
+  }
+
+
   const touch =
     event.changedTouches?.[0];
 
+
   if (!touch) {
+
+    resetStage();
+
     return;
+
   }
 
 
@@ -5387,23 +5513,50 @@ async function handleReelsTouchEnd(
     );
 
 
+  /* PAS ASSEZ DE MOUVEMENT :
+     RETOUR À LA POSITION NORMALE */
+
   if (
     Math.abs(distanceY) < 70 ||
     Math.abs(distanceY) <= distanceX
   ) {
+
+    resetStage();
+
     return;
+
+  }
+
+
+  const direction =
+    distanceY > 0
+      ? 1
+      : -1;
+
+
+  const nextIndex =
+    currentReelIndex +
+    direction;
+
+
+  /* PREMIÈRE / DERNIÈRE PUBLICATION :
+     EFFET ÉLASTIQUE PUIS RETOUR */
+
+  if (
+    nextIndex < 0 ||
+    nextIndex >= reelPosts.length
+  ) {
+
+    resetStage();
+
+    return;
+
   }
 
 
-  if (distanceY > 0) {
-
-    await changeReel(1);
-
-  } else {
-
-    await changeReel(-1);
-
-  }
+  await changeReel(
+    direction
+  );
 
 }
 
@@ -5417,6 +5570,14 @@ $("#reelsPage")
     }
   );
 
+$("#reelsPage")
+  ?.addEventListener(
+    "touchmove",
+    handleReelsTouchMove,
+    {
+      passive: false
+    }
+  );
 
 $("#reelsPage")
   ?.addEventListener(
