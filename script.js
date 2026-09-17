@@ -5787,9 +5787,8 @@ function showReelsHeart() {
 
   heart.innerHTML =
   `
-  <span class="reels-heart-shape">♥</span>
-  <span class="reels-heart-arrow">➶</span>
-  `;
+  heart.textContent =
+  "💘";
   stage.appendChild(
     heart
   );
