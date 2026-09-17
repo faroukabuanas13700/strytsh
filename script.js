@@ -9768,19 +9768,69 @@ src:
   /* VIDEO NORMALE */
 
   if (
-    media.tagName ===
-    "VIDEO"
-  ) {
+  media.tagName ===
+  "VIDEO"
+) {
 
-    media.muted = true;
-    media.loop = true;
-    media.playsInline = true;
-    media.autoplay = true;
+  media.muted = true;
+  media.loop = true;
+  media.playsInline = true;
+  media.autoplay = false;
 
+  media.pause();
+
+  const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(
+          entry => {
+
+            if (
+              entry.isIntersecting &&
+              entry.intersectionRatio >= 0.6
+            ) {
+
+              $$("#homeFeed video")
+                .forEach(
+                  video => {
+
+                    if (
+                      video !== entry.target
+                    ) {
+                      video.pause();
+                    }
+
+                  }
+                );
+
+              entry.target
+                .play()
+                .catch(() => {});
+
+            } else {
+
+              entry.target.pause();
+
+            }
+
+          }
+        );
+
+      },
+      {
+        threshold: [
+          0,
+          0.6,
+          1
+        ]
+      }
+    );
+
+  observer.observe(
     media
-      .play()
-      .catch(() => {});
-
+  );
+  
 
     media.addEventListener(
       "click",
