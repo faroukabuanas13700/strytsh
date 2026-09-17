@@ -4853,3 +4853,56 @@ MENU MODIFIER IMAGE / AVATAR
   }
 
 }
+/* =========================================================
+DOUBLE TAP REELS - COEUR
+========================================================= */
+
+.reels-double-heart{
+  position:absolute;
+  left:50%;
+  top:50%;
+
+  z-index:50;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.4);
+
+  color:#fff;
+
+  font-size:92px;
+  line-height:1;
+
+  pointer-events:none;
+
+  text-shadow:
+    0 4px 18px rgba(0,0,0,.45);
+
+  opacity:0;
+
+  animation:
+    reelsHeartPop
+    .8s ease forwards;
+}
+
+@keyframes reelsHeartPop{
+
+  0%{
+    opacity:0;
+    transform:
+      translate(-50%,-50%)
+      scale(.35);
+  }
+
+  25%{
+    opacity:1;
+    transform:
+      translate(-50%,-50%)
+      scale(1.15);
+  }
+
+  55%{
+    opacity:1;
+    transform:
+      translate(-50%,-50%)
+     
