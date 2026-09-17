@@ -15,7 +15,52 @@ let supabaseClient = null;
 let currentUser = null;
 let currentUserAvatar = "";
 let authEventsConfigured = false;
+let currentUserIsAdmin = false;
 
+async function loadAdminStatus() {
+
+  currentUserIsAdmin = false;
+
+  if (
+    !supabaseClient ||
+    !currentUser
+  ) {
+    return;
+  }
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .rpc("is_admin");
+
+    if (error) {
+      throw error;
+    }
+
+    currentUserIsAdmin =
+      data === true;
+
+    console.log(
+      "Administrateur :",
+      currentUserIsAdmin
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Erreur vérification admin :",
+      error
+    );
+
+    currentUserIsAdmin =
+      false;
+  }
+
+}
 try {
   if (
     window.supabase &&
@@ -427,7 +472,7 @@ async function loginUser(
 
     currentUser =
       data.session.user;
-
+await loadAdminStatus();
 
     loadLocalStateForUser();
 
@@ -549,7 +594,7 @@ async function signupUser(
     if (
       data?.session?.user
     ) {
-
+await loadAdminStatus();
       currentUser =
         data.session.user;
 
@@ -13624,7 +13669,7 @@ async function initializeApp() {
 
     currentUser =
       session.user;
-
+await loadAdminStatus();
     loadLocalStateForUser();
 
     applyTheme();
