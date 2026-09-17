@@ -3546,13 +3546,28 @@ function isOwnPost(post) {
   );
 
 }
+function canDeletePost(post) {
 
+  if (
+    !post ||
+    !currentUser
+  ) {
+    return false;
+  }
+
+  return (
+    currentUserIsAdmin ||
+    getPostOwnerId(post) ===
+      currentUser.id
+  );
+
+}
 
 function openPostMenu(post) {
 
-  if (!isOwnPost(post)) {
-    return;
-  }
+  if (!canDeletePost(post)) {
+  return;
+}
 
   selectedPostForMenu =
     post;
@@ -3598,9 +3613,8 @@ function addPostOptionsButton(
     ?.remove();
 
 
-  if (!isOwnPost(post)) {
-    return;
-  }
+  if (!canDeletePost(post)) {
+  return;if
 
 
   const button =
