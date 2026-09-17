@@ -5785,9 +5785,11 @@ function showReelsHeart() {
   heart.className =
     "reels-double-heart";
 
-  heart.textContent =
-    "♥";
-
+  heart.innerHTML =
+  `
+  <span class="reels-heart-shape">♥</span>
+  <span class="reels-heart-arrow">➶</span>
+  `;
   stage.appendChild(
     heart
   );
