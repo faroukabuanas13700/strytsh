@@ -1798,7 +1798,7 @@ async function setMedia(
   updateBottomProfileAvatar();
 
 }
-
+renderProfileEditAvatar();
 if (
   fieldName ===
   "cover_url"
