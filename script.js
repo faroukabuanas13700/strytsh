@@ -5760,6 +5760,7 @@ let reelsLastTapY = 0;
 
 
 function showReelsHeart() {
+function showReelsHeart() {
 
   const stage =
     document.querySelector(
@@ -5783,14 +5784,14 @@ function showReelsHeart() {
     );
 
   heart.className =
-  "reels-double-heart";
+    "reels-double-heart";
 
-heart.textContent =
-  "💘";
+  heart.textContent =
+    "💘";
 
-stage.appendChild(
-  heart
-);
+  stage.appendChild(
+    heart
+  );
 
 
   setTimeout(
@@ -5801,7 +5802,6 @@ stage.appendChild(
   );
 
 }
-
 
 async function likeCurrentReelOnly() {
 
