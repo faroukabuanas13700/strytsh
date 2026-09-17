@@ -10190,7 +10190,25 @@ PAGE NOTIFICATIONS
 
 let notificationsRealtimeChannel =
   null;
+function updateNotificationsHeartState() {
+  const btn = $("#notificationsBtn");
+  const badge = $("#notificationBadge");
 
+  if (!btn || !badge) {
+    return;
+  }
+
+  const total =
+    parseInt(
+      (badge.textContent || "0").trim(),
+      10
+    ) || 0;
+
+  btn.classList.toggle(
+    "has-notifications",
+    !badge.hidden && total > 0
+  );
+}
 
 async function refreshNotificationBadge() {
 
@@ -10243,14 +10261,16 @@ async function refreshNotificationBadge() {
 
     if (total === 0) {
 
-      badge.hidden =
-        true;
+  badge.hidden =
+    true;
 
-      badge.textContent =
-        "0";
+  badge.textContent =
+    "0";
 
-      return;
-    }
+  updateNotificationsHeartState();
+
+  return;
+}
 
 
     badge.hidden =
@@ -10261,7 +10281,7 @@ async function refreshNotificationBadge() {
       total > 99
         ? "99+"
         : String(total);
-
+updateNotificationsHeartState();
 
   } catch (error) {
 
