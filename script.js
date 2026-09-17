@@ -9477,9 +9477,9 @@ const feedUserIds = [
   "id,user_id,type,source_type,media_url,caption,likes"
 )
         .in(
-          "user_id",
-          followingIds
-        )
+  "user_id",
+  feedUserIds
+)
         .order(
           "id",
           {
