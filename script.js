@@ -5759,7 +5759,7 @@ let reelsLastTapX = 0;
 let reelsLastTapY = 0;
 
 
-function showReelsHeart() {
+
 function showReelsHeart() {
 
   const stage =
