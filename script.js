@@ -5606,7 +5606,67 @@ async function handleReelsTouchEnd(
 
   }
 
+const tapMoveY =
+  Math.abs(
+    touch.clientY -
+    reelsTouchStartY
+  );
 
+const tapMoveX =
+  Math.abs(
+    touch.clientX -
+    reelsTouchStartX
+  );
+
+
+/* DOUBLE TAP POUR LIKER */
+
+if (
+  tapMoveY < 20 &&
+  tapMoveX < 20
+) {
+
+  const now =
+    Date.now();
+
+
+  const closeToLastTap =
+    Math.abs(
+      touch.clientX -
+      reelsLastTapX
+    ) < 45 &&
+    Math.abs(
+      touch.clientY -
+      reelsLastTapY
+    ) < 45;
+
+
+  if (
+    now -
+      reelsLastTapTime <
+      320 &&
+    closeToLastTap
+  ) {
+
+    reelsLastTapTime = 0;
+
+    await likeCurrentReelOnly();
+
+  } else {
+
+    reelsLastTapTime =
+      now;
+
+    reelsLastTapX =
+      touch.clientX;
+
+    reelsLastTapY =
+      touch.clientY;
+
+  }
+
+}
+  
   const distanceY =
     reelsTouchStartY -
     touch.clientY;
@@ -5693,6 +5753,163 @@ $("#reelsPage")
       passive: true
     }
   );
+
+let reelsLastTapTime = 0;
+let reelsLastTapX = 0;
+let reelsLastTapY = 0;
+
+
+function showReelsHeart() {
+
+  const stage =
+    document.querySelector(
+      "#reelsPage .reels-stage"
+    );
+
+  if (!stage) {
+    return;
+  }
+
+  stage
+    .querySelector(
+      ".reels-double-heart"
+    )
+    ?.remove();
+
+
+  const heart =
+    document.createElement(
+      "div"
+    );
+
+  heart.className =
+    "reels-double-heart";
+
+  heart.textContent =
+    "♥";
+
+  stage.appendChild(
+    heart
+  );
+
+
+  setTimeout(
+    () => {
+      heart.remove();
+    },
+    800
+  );
+
+}
+
+
+async function likeCurrentReelOnly() {
+
+  if (
+    !currentReelPost ||
+    !currentUser ||
+    !supabaseClient
+  ) {
+    return;
+  }
+
+
+  const postId =
+    currentReelPost.id;
+
+
+  try {
+
+    const {
+      data: existingLike,
+      error: checkError
+    } =
+      await supabaseClient
+        .from("post_likes")
+        .select(
+          "post_id,user_id"
+        )
+        .eq(
+          "post_id",
+          postId
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (checkError) {
+      throw checkError;
+    }
+
+
+    /* DÉJÀ LIKÉ :
+       ON GARDE LE LIKE */
+
+    if (!existingLike) {
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from("post_likes")
+          .insert({
+            post_id:
+              postId,
+
+            user_id:
+              currentUser.id
+          });
+
+
+      if (error) {
+        throw error;
+      }
+
+    }
+
+
+    state.liked[
+      postId
+    ] = true;
+
+
+    const total =
+      await refreshPostLikes(
+        postId
+      );
+
+
+    currentReelPost.likes =
+      total;
+
+
+    if (
+      $("#reelsLikeCount")
+    ) {
+
+      $("#reelsLikeCount")
+        .textContent =
+        formatLikes(total);
+
+    }
+
+
+    showReelsHeart();
+
+
+  } catch (error) {
+
+    console.error(
+      "Erreur double tap Reel :",
+      error
+    );
+
+  }
+
+}
       async function openReels(
   post,
   startWithSound = false
