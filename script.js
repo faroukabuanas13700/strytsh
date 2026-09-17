@@ -5783,15 +5783,14 @@ function showReelsHeart() {
     );
 
   heart.className =
-    "reels-double-heart";
+  "reels-double-heart";
 
-  heart.innerHTML =
-  `
-  heart.textContent =
+heart.textContent =
   "💘";
-  stage.appendChild(
-    heart
-  );
+
+stage.appendChild(
+  heart
+);
 
 
   setTimeout(
