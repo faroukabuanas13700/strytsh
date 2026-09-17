@@ -3614,8 +3614,8 @@ function addPostOptionsButton(
 
 
   if (!canDeletePost(post)) {
-  return;if
-
+  return;
+}
 
   const button =
     document.createElement(
@@ -3840,10 +3840,9 @@ $("#deletePostMenuBtn")
         selectedPostForMenu;
 
 
-      if (!isOwnPost(post)) {
-        return;
-      }
-
+      if (!canDeletePost(post)) {
+  return;
+}
 
       const confirmed =
         window.confirm(
@@ -3865,16 +3864,12 @@ $("#deletePostMenuBtn")
           error
         } =
           await supabaseClient
-            .from("posts")
-            .delete()
-            .eq(
-              "id",
-              post.id
-            )
-            .eq(
-              "user_id",
-              currentUser.id
-            );
+  .from("posts")
+  .delete()
+  .eq(
+    "id",
+    post.id
+  );
 
 
         if (error) {
