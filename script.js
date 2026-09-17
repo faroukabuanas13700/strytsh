@@ -9333,10 +9333,10 @@ const feedUserIds = [
         .select(
           "id,username,name,avatar_url"
         )
-        .in(
-  "user_id",
+  .in(
+  "id",
   feedUserIds
-)
+);
 
     if (profilesError) {
       throw profilesError;
