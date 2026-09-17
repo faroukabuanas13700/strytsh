@@ -4892,109 +4892,66 @@ DOUBLE TAP REELS - COEUR
 
   z-index:50;
 
-  width:210px;
-  height:190px;
-
   transform:
     translate(-50%,-50%)
-    scale(.25);
+    scale(.2);
+
+  font-size:220px;
+  line-height:1;
 
   pointer-events:none;
 
   opacity:0;
+
+  filter:
+    saturate(1.8)
+    contrast(1.08);
 
   animation:
     reelsHeartPop
     .75s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-
-/* GROS COEUR ROUGE */
-
-.reels-heart-shape{
-  position:absolute;
-  left:50%;
-  top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
-  color:#ff003c;
-
-  font-size:185px;
-  line-height:1;
-
-  text-shadow:
-    0 4px 22px rgba(255,0,60,.45),
-    0 4px 18px rgba(0,0,0,.35);
-}
-
-
-/* FLÈCHE DU COEUR 💘 */
-
-.reels-heart-arrow{
-  position:absolute;
-
-  left:22px;
-  top:16px;
-
-  color:#fff;
-
-  font-size:118px;
-  font-weight:900;
-
-  transform:
-    rotate(-38deg);
-
-  text-shadow:
-    0 3px 8px rgba(0,0,0,.65);
-}
-
-
 @keyframes reelsHeartPop{
 
   0%{
     opacity:0;
-
     transform:
       translate(-50%,-50%)
-      scale(.20)
+      scale(.2)
       rotate(-8deg);
   }
 
   20%{
     opacity:1;
-
     transform:
       translate(-50%,-50%)
-      scale(1.22)
+      scale(1.18)
       rotate(3deg);
   }
 
-  38%{
+  40%{
     opacity:1;
-
     transform:
       translate(-50%,-50%)
-      scale(.95);
+      scale(.96);
   }
 
-  58%{
+  60%{
     opacity:1;
-
     transform:
       translate(-50%,-50%)
-      scale(1.05);
+      scale(1.04);
   }
 
   100%{
     opacity:0;
-
     transform:
       translate(-50%,-50%)
-      scale(1.35);
+      scale(1.28);
   }
 
 }
+
 
      
