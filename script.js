@@ -9316,18 +9316,12 @@ async function loadHomeFeed() {
             row.following_id
         )
         .filter(Boolean);
+const feedUserIds = [
+  currentUser.id,
+  ...followingIds
+];
 
-
-    if (!followingIds.length) {
-
-      if (empty) {
-        empty.hidden = false;
-        empty.textContent =
-          "Vous ne suivez encore aucun compte.";
-      }
-
-      return;
-    }
+    
 
 
     const {
@@ -9340,9 +9334,9 @@ async function loadHomeFeed() {
           "id,username,name,avatar_url"
         )
         .in(
-          "id",
-          followingIds
-        );
+  "user_id",
+  feedUserIds
+)
 
     if (profilesError) {
       throw profilesError;
