@@ -4885,24 +4885,72 @@ DOUBLE TAP REELS - COEUR
     .8s ease forwards;
 }
 
+.reels-double-heart{
+  position:absolute;
+  left:50%;
+  top:50%;
+
+  z-index:50;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.3);
+
+  color:#ff1744;
+
+  font-size:132px;
+  line-height:1;
+
+  pointer-events:none;
+
+  text-shadow:
+    0 3px 18px rgba(255,23,68,.35),
+    0 4px 20px rgba(0,0,0,.35);
+
+  opacity:0;
+
+  animation:
+    reelsHeartPop
+    .72s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+
 @keyframes reelsHeartPop{
 
   0%{
     opacity:0;
     transform:
       translate(-50%,-50%)
-      scale(.35);
+      scale(.25);
   }
 
-  25%{
+  18%{
     opacity:1;
     transform:
       translate(-50%,-50%)
-      scale(1.15);
+      scale(1.28);
   }
 
-  55%{
+  38%{
     opacity:1;
     transform:
       translate(-50%,-50%)
+      scale(.96);
+  }
+
+  58%{
+    opacity:1;
+    transform:
+      translate(-50%,-50%)
+      scale(1.08);
+  }
+
+  100%{
+    opacity:0;
+    transform:
+      translate(-50%,-50%)
+      scale(1.35);
+  }
+
+}
      
