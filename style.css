@@ -4953,5 +4953,65 @@ DOUBLE TAP REELS - COEUR
 
 }
 
+.home-feed-heart{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-     
+.home-feed-heart-icon{
+  color:#ff2d55;
+  font-size:30px;
+  line-height:1;
+  display:inline-block;
+  filter:drop-shadow(0 0 6px rgba(255,45,85,.25));
+  transition:transform .2s ease;
+}
+
+/* Quand il y a des notifications */
+.home-feed-heart.has-notifications .home-feed-heart-icon{
+  transform:scale(1.08);
+}
+
+/* Flamme animée */
+.home-feed-heart.has-notifications::after{
+  content:"🔥";
+  position:absolute;
+  top:-6px;
+  right:2px;
+  font-size:16px;
+  line-height:1;
+  pointer-events:none;
+  transform-origin:center bottom;
+  animation:
+    flameFlicker .55s infinite alternate ease-in-out,
+    flameFloat 1.2s infinite ease-in-out;
+}
+
+@keyframes flameFlicker{
+  0%{
+    transform:rotate(-6deg) scale(.95);
+    filter:brightness(.95);
+  }
+  50%{
+    transform:rotate(4deg) scale(1.08);
+    filter:brightness(1.08);
+  }
+  100%{
+    transform:rotate(-3deg) scale(1);
+    filter:brightness(1.18);
+  }
+}
+
+@keyframes flameFloat{
+  0%{
+    margin-top:0;
+  }
+  50%{
+    margin-top:-1px;
+  }
+  100%{
+    margin-top:1px;
+  }
+}
