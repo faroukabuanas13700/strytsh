@@ -6020,7 +6020,15 @@ setReelSequence(
         
 
   currentReelPost = post;
+const reelsLikeButton =
+  $("#reelsLikeBtn");
 
+if (reelsLikeButton) {
+  reelsLikeButton.classList.toggle(
+    "liked",
+    state.liked[post.id] === true
+  );
+}
 await updateCommentCount(
   post.id
 );
@@ -6464,7 +6472,15 @@ $("#reelsLikeBtn")
         currentReelPost.id,
         false
       );
+     const reelsLikeButton =
+  $("#reelsLikeBtn");
 
+if (reelsLikeButton) {
+  reelsLikeButton.classList.toggle(
+    "liked",
+    state.liked[currentReelPost.id] === true
+  );
+}
       await refreshPostLikes(
         currentReelPost.id
       );
