@@ -5066,3 +5066,11 @@ ICONES ACTIONS REELS
 
   display: block;
 }
+/* =========================================================
+COEUR LIKE ROUGE
+========================================================= */
+
+.reels-action-btn.liked .reels-action-icon {
+  fill: #ff3040;
+  stroke: #ff3040;
+}
