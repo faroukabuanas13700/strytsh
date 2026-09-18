@@ -5986,7 +5986,9 @@ const soundButton =
   document.getElementById(
     "reelsSoundBtn"
   );
-
+if (soundButton) {
+  soundButton.hidden = true;
+}
 const isEmbed =
   post?.sourceType ===
   "embed";
@@ -6167,8 +6169,8 @@ if (isEmbed) {
 
 
   if (soundButton) {
-    soundButton.hidden = false;
-  }
+  soundButton.hidden = true;
+}
 
 
   updateReelsSoundIcon();
