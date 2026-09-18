@@ -5051,3 +5051,20 @@ ICONES BAS STYLE INSTAGRAM
 .bottom-nav-btn[data-unread="true"] {
   color: #ff3040;
 }
+/* =========================================================
+ICONES ACTIONS REELS
+========================================================= */
+
+.reels-action-icon {
+  width: 30px;
+  height: 30px;
+
+  fill: none;
+  stroke: currentColor;
+
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  display: block;
+}
